@@ -15,7 +15,7 @@ const getTime = () => {
 	let secondsNow = todayDate.getSeconds();
 
 	return {day, hourNow, minutesNow, secondsNow, happyNewYear};
-}
+};
 
 const update = () => {
 	let time = getTime();
@@ -80,5 +80,24 @@ top: 40%;
 left: 40%;`;
 update();
 
+const p = document.querySelector("p");
+const input = document.querySelector("input");
 
+const debounce = (fn, ms) => {
+	let timeOut;
+	return function () {
+		const fnCall = () => {
+			fn.apply(this, [p, this]);
+		};
+		clearTimeout(timeOut);
+		timeOut = setTimeout(fnCall, ms);
+	};
+};
+
+function onChange (a,b) {
+	a.textContent = b.value;
+}
+
+onChange = debounce(onChange, 300);
+input.addEventListener("keyup", onChange);
 
