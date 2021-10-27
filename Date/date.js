@@ -105,8 +105,9 @@ input.addEventListener("keyup", onChange);
 //АНИМАЦИЯ
 const smallCircle = document.querySelectorAll(".smallCircle");
 let idAnimation;
-let count = 0;
-let active = false;
+let count = 1;
+let active = true;
+let stop = document.getElementById("stop");
 
 const animate = () => {
 	count++;
@@ -115,8 +116,6 @@ const animate = () => {
 		speed: 10
 	};
 	let a = 0;
-	let a1 = 0;
-	let a2 = 0;
 	let corner = count * Math.PI / 180;
 
 	idAnimation = requestAnimationFrame(animate);
@@ -125,7 +124,7 @@ const animate = () => {
 		smallCircle[0].style.top = 235 + elems.radius * Math.cos(a) + 'px';
 };
 
-document.addEventListener("click", () => {
+stop.addEventListener("click", () => {
 	if (active) {
 		animate();
 		active = false;

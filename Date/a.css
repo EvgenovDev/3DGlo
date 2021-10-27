@@ -28,3 +28,11 @@
 .enter {
 	text-align: center;
 }
+
+button {
+	width: 100px;
+	height: 50px;
+	position: absolute;
+	top: 60%;
+	left: 46.5%;
+}
