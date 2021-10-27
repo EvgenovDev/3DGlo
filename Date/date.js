@@ -80,6 +80,7 @@ top: 40%;
 left: 40%;`;
 update();
 
+//DEBOUNCE
 const p = document.querySelector("p");
 const input = document.querySelector("input");
 
@@ -101,3 +102,35 @@ function onChange (a,b) {
 onChange = debounce(onChange, 300);
 input.addEventListener("keyup", onChange);
 
+//АНИМАЦИЯ
+const smallCircle = document.querySelectorAll(".smallCircle");
+let idAnimation;
+let count = 0;
+let active = false;
+
+const animate = () => {
+	count++;
+	let elems = {
+		radius: 250,
+		speed: 10
+	};
+	let a = 0;
+	let a1 = 0;
+	let a2 = 0;
+	let corner = count * Math.PI / 180;
+
+	idAnimation = requestAnimationFrame(animate);
+		a = a + corner; 
+		smallCircle[0].style.left = 235 + elems.radius * Math.sin(a) + 'px'; 
+		smallCircle[0].style.top = 235 + elems.radius * Math.cos(a) + 'px';
+};
+
+document.addEventListener("click", () => {
+	if (active) {
+		animate();
+		active = false;
+	} else {
+		cancelAnimationFrame(idAnimation);
+		active = true;
+	}
+});
