@@ -1,5 +1,5 @@
 import timer from "./modules/timer";
-import two from "./modules/secondModule";
+import menu from "./modules/menu";
 
 timer("30 october 2021");
-two();
+menu();
