@@ -20,6 +20,12 @@ const menu = () => {
 		return value1;
 	};
 
+	const scrolls = (elemForFunc, callback, event) => {
+		event.preventDefault();
+		let id =callback (elemForFunc);
+		document.getElementById(id).scrollIntoView({behavior: "smooth"});
+	};
+
 	const showPopup = () => { 
 		let idAnimate;
 		let x = 0;
@@ -49,11 +55,13 @@ const menu = () => {
 
 	menuLinks.forEach((elem) => {
 		elem.addEventListener("click", (e) => {
-			e.preventDefault();
 			toggleMenu();
-			let id = getIdLink(elem);
-			document.getElementById(id).scrollIntoView({behavior: "smooth"});
+			scrolls(elem, getIdLink, e);
 		});
+	});
+
+	serviceBlock.addEventListener("click", (e) => {
+		scrolls(serviceBlock, getIdLink, e);
 	});
 
 	btnsPopup.forEach((elem) => {
@@ -66,12 +74,6 @@ const menu = () => {
 
 	popupClose.addEventListener("click", () => {
 		popup.style.display = "none";
-	});
-
-	serviceBlock.addEventListener("click", (e) => {
-		e.preventDefault();
-		let id =getIdLink(serviceBlock);
-		document.getElementById(id).scrollIntoView({behavior: "smooth"});
 	});
 
 };
