@@ -43,11 +43,12 @@ const menu = () => {
 				cancelAnimationFrame(idAnimate);
 			}
 		};
-
-		popupContent.style.transform = "scale(0.001, 0.001)";
 		popup.style.display = "block";
 		popupContent.style.borderRadius = "10px";
-		animate();
+		if (document.documentElement.clientWidth > 768) {
+			popupContent.style.transform = "scale(0.001, 0.001)";
+			animate();
+			}
 	};
 
 	btnMenu.addEventListener("click", toggleMenu);
@@ -65,11 +66,7 @@ const menu = () => {
 	});
 
 	btnsPopup.forEach((elem) => {
-		if (document.documentElement.clientWidth <= 768) {
-			elem.addEventListener("click", () => popup.style.display = "block");
-		} else {
-			elem.addEventListener("click", showPopup);
-		}
+		elem.addEventListener("click", showPopup);
 	});
 
 	popupClose.addEventListener("click", () => {
