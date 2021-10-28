@@ -7,9 +7,17 @@ const menu = () => {
 	const popup = document.querySelector(".popup");
 	const popupClose = popup.querySelector(".popup-close");
 	const popupContent = popup.querySelector(".popup-content");
+	const serviceBlock = document.querySelector('a[href="#service-block"]');
 
 	const toggleMenu = () => {
 		menu.classList.toggle("active-menu");
+	};
+
+	const getIdLink = (elem) => {
+		let value = elem.getAttribute("href");
+		let value1 = value.slice(1, value.length);
+
+		return value1;
 	};
 
 	const showPopup = () => { 
@@ -40,7 +48,12 @@ const menu = () => {
 	btnCloseMenu.addEventListener("click", toggleMenu);
 
 	menuLinks.forEach((elem) => {
-		elem.addEventListener("click", toggleMenu);
+		elem.addEventListener("click", (e) => {
+			e.preventDefault();
+			toggleMenu();
+			let id = getIdLink(elem);
+			document.getElementById(id).scrollIntoView({behavior: "smooth"});
+		});
 	});
 
 	btnsPopup.forEach((elem) => {
@@ -54,8 +67,13 @@ const menu = () => {
 	popupClose.addEventListener("click", () => {
 		popup.style.display = "none";
 	});
+
+	serviceBlock.addEventListener("click", (e) => {
+		e.preventDefault();
+		let id =getIdLink(serviceBlock);
+		document.getElementById(id).scrollIntoView({behavior: "smooth"});
+	});
+
 };
-
-
 
 export default menu;
