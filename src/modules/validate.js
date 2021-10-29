@@ -45,8 +45,6 @@ const formValidate = (form) => {
 		form.querySelector("input[placeholder='Ваше имя']").value = arr.join("");
 	});
 
-
-
 	form.querySelector("input[type='email']").addEventListener("blur", () => {
 		let str = form.querySelector("input[type='email']").value.replace(/(^\s+|^\-+)|(\s+$|\-+$)/gm, '');
 		str = str.replace(/\-+/g, "-");
