@@ -34,12 +34,14 @@ const formValidate = (form) => {
 		let str = form.querySelector("input[placeholder='Ваше имя']").value.replace(/^\s+|^\-+|\s+$|\-+$/gm, '');
 		str = str.replace(/\s+/g, " ");
 		str = str.replace(/\-+/g, "-");
-		const arr = [];
+		let arr = [];
 		const regExp = /[а-я\-\s]/i;
 
 		saveCorrectValue(arr, str, regExp);	
-		let firstChar = arr[0].toUpperCase();	
-		arr[0] = firstChar;
+		arr[0] = arr[0].toUpperCase();
+		for (let i = 1; i < arr.length; i++){
+			arr[i] = arr[i].toLowerCase();
+		}
 		form.querySelector("input[placeholder='Ваше имя']").value = arr.join("");
 	});
 
