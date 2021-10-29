@@ -68,6 +68,8 @@ const formValidate = (form) => {
 
  calcValidate();
  formValidate(document.querySelector(".main-form"));
+ formValidate(document.querySelector(".footer-form"));
+ formValidate(document.querySelector(".popup"));
 };
 
 export default validate;
