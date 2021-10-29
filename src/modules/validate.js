@@ -37,9 +37,10 @@ const formValidate = (form) => {
 		const arr = [];
 		const regExp = /[а-я\-\s]/i;
 
-		saveCorrectValue(arr, str, regExp);		
+		saveCorrectValue(arr, str, regExp);	
+		let firstChar = arr[0].toUpperCase();	
+		arr[0] = firstChar;
 		form.querySelector("input[placeholder='Ваше имя']").value = arr.join("");
-		form.querySelector("input[placeholder='Ваше имя']").value[0] = form.querySelector("input[placeholder='Ваше имя']").value[0].toUpperCase();
 	});
 
 
