@@ -37,11 +37,11 @@ const formValidate = (form) => {
 		let arr = [];
 		const regExp = /[а-я\-\s]/i;
 
+		saveCorrectValue(arr, str, regExp);
 		let i = 0;
 		if (arr[i] !== undefined){
 			arr[i] = arr[i].toUpperCase();
 		} 
-		saveCorrectValue(arr, str, regExp);
 		for (i = i + 1; i < arr.length; i++) {
 			arr[i] = arr[i].toLowerCase();
 		}
