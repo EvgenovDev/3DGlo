@@ -37,9 +37,12 @@ const formValidate = (form) => {
 		let arr = [];
 		const regExp = /[а-я\-\s]/i;
 
-		saveCorrectValue(arr, str, regExp);	
-		arr[0] = arr[0].toUpperCase();
-		for (let i = 1; i < arr.length; i++){
+		let i = 0;
+		if (arr[i] !== undefined){
+			arr[i] = arr[i].toUpperCase();
+		} 
+		saveCorrectValue(arr, str, regExp);
+		for (i = i + 1; i < arr.length; i++) {
 			arr[i] = arr[i].toLowerCase();
 		}
 		form.querySelector("input[placeholder='Ваше имя']").value = arr.join("");
@@ -50,9 +53,20 @@ const formValidate = (form) => {
 		str = str.replace(/\-+/g, "-");
 		const arr = [];
 		const regExp = /[a-z\@\-\_\.!\~\*]/i;
-		
+		const regExp1 = /[a-z\-\_\.\~\*]+@[a-z]+\.[a-z]+/gi;
+
 		saveCorrectValue(arr, str, regExp);		
 		form.querySelector("input[type='email']").value = arr.join("");
+		if (!regExp1.test(form.querySelector("input[type='email']").value)) {
+			form.querySelector("input[type='email']").value = "";
+			form.querySelector("input[type='email']").style.background = "red";
+			form.querySelector("input[type='email']").setAttribute("placeholder", "Введите email в форме ex@ex.ex");
+		}
+	});
+
+	form.querySelector("input[type='email']").addEventListener("focus", () => {
+		form.querySelector("input[type='email']").style.background = "white";
+		form.querySelector("input[type='email']").setAttribute("placeholder", "E-mail");
 	});
 
 	form.querySelector("input[type='tel']").addEventListener("blur", () => {
