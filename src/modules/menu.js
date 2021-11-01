@@ -1,9 +1,9 @@
+import scrolls from "./scrolls";
+
 const menu = () => {
-	const btnMenu = document.querySelector(".menu");
 	const menu = document.querySelector("menu");
-	const btnCloseMenu = menu.querySelector(".close-btn");
-	const menuLinks = menu.querySelectorAll("ul>li>a");
 	const serviceBlock = document.querySelector('a[href="#service-block"]');
+	const main = document.querySelector("main");
 
 	const toggleMenu = () => {
 		menu.classList.toggle("active-menu");
@@ -16,25 +16,24 @@ const menu = () => {
 		return value1;
 	};
 
-	const scrolls = (elemForFunc, callback, event) => {
-		event.preventDefault();
-		let id = callback(elemForFunc);
-		document.getElementById(id).scrollIntoView({behavior: "smooth"});
-	};
-
-	btnMenu.addEventListener("click", toggleMenu);
-	btnCloseMenu.addEventListener("click", toggleMenu);
-
-	menuLinks.forEach((elem) => {
-		elem.addEventListener("click", (e) => {
+	main.addEventListener("click", (e) => {
+		if (e.target.closest(".menu")) {
 			toggleMenu();
-			scrolls(e.target, getIdLink, e);
-		});
+		} else if (e.target === serviceBlock) {
+			scrolls(serviceBlock, getIdLink, e);
+		}
 	});
 
-	serviceBlock.addEventListener("click", (e) => {
-		console.log(e.target);
-		scrolls(serviceBlock, getIdLink, e);
+	menu.addEventListener("click", (e) => {
+		if (e.target.closest("menu") === menu && 
+		(e.target.classList.contains("close-btn") || e.target.closest("li"))) {
+			if (e.target.closest("li")) {
+				toggleMenu();
+				scrolls(e.target, getIdLink, e);
+			} else {
+				toggleMenu();
+			}
+		}
 	});
 };
 

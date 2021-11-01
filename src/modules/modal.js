@@ -33,8 +33,10 @@ const modal = () => {
 		elem.addEventListener("click", showPopup);
 	});
 
-	popupClose.addEventListener("click", () => {
-		popup.style.display = "none";
+	popup.addEventListener("click", (e) => {
+		if (!e.target.closest(".popup-content") || e.target.classList.contains(".popup-close")) {
+			popup.style.display = "none";
+		}
 	});
 };
 
