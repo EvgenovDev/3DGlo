@@ -22,7 +22,7 @@ const menu = () => {
 
 	const scrolls = (elemForFunc, callback, event) => {
 		event.preventDefault();
-		let id =callback (elemForFunc);
+		let id = callback(elemForFunc);
 		document.getElementById(id).scrollIntoView({behavior: "smooth"});
 	};
 
