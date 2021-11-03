@@ -4,7 +4,7 @@ const modal = () => {
 	const btnsPopup = document.querySelectorAll(".popup-btn");
 	const popupClose = popup.querySelector(".popup-close");
 
-	const showPopup = () => { 
+	const showPopup = () => {
 		let idAnimate;
 		let x = 0;
 		let y = 0;
@@ -26,7 +26,7 @@ const modal = () => {
 		if (document.documentElement.clientWidth > 768) {
 			popupContent.style.transform = "scale(0.001, 0.001)";
 			animate();
-			}
+		}
 	};
 
 	btnsPopup.forEach((elem) => {
