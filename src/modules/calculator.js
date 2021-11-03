@@ -7,6 +7,7 @@ const calculator = (price = 100) => {
 	const calcCount = document.querySelector(".calc-count");
 	const calcDay = document.querySelector(".calc-day");
 	const calcTotal = document.querySelector(".calc-total>span");
+	let isWorkNow = false;
 
 	const calc = () => {
 		let calcSelectValue;
@@ -27,8 +28,6 @@ const calculator = (price = 100) => {
 
 		if (calcSquare.value && calcSelectValue) {
 			let total = price * calcSelectValue * calcSquareValue * calcDayValue * calcCountValue;
-			console.log(total);
-			runNumber(total, 2000, 5, 0, calcTotal);
 		}
 	};
 
