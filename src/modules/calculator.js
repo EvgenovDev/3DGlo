@@ -1,3 +1,7 @@
+import {
+	animate
+} from "./helpers";
+
 const calculator = (price = 100) => {
 	const calcBlock = document.querySelector(".calc-block");
 	const calcSelect = document.querySelector(".calc-type");
@@ -8,17 +12,19 @@ const calculator = (price = 100) => {
 	let total;
 	let idInterval;
 
-	let runNumber = (stopNumber, time, step, startNumber, outPlace) => {
-		// Где n это общее кол-во шагов, t - это время на один шаг, time - Общее время
-		// stopNember - нужное нам число, startNumber - начальное число,
-		const t = Math.round(time / (+stopNumber / step));
-		idInterval = setInterval(() => {
-			startNumber += step;
-			outPlace.textContent = startNumber;
-			if (startNumber == stopNumber) {
-				clearInterval(idInterval);
+	const runNumber = (elem1, endNumber, step, startNumber) => {
+		animate({
+			duration: 2000,
+			timing(frame) {
+				return console.log(frame);
+			},
+			draw(progress) {
+				let arr = [];
+				arr.push(progress);
+				let n = endNumber / arr.length;
+
 			}
-		}, t);
+		});
 	};
 
 	const calc = () => {
@@ -47,9 +53,8 @@ const calculator = (price = 100) => {
 		if (e.target === calcSelect || e.target === calcSquare ||
 			e.target === calcCount || e.target === calcDay) {
 			calc();
-			clearInterval(idInterval);
 			if (total) {
-				runNumber(total, 2000, 1, 0, calcTotal);
+				runNumber(calcTotal, total);
 			}
 		}
 	});
