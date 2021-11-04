@@ -1,5 +1,3 @@
-import runNumber from "./runNumber";
-
 const calculator = (price = 100) => {
 	const calcBlock = document.querySelector(".calc-block");
 	const calcSelect = document.querySelector(".calc-type");
@@ -7,7 +5,27 @@ const calculator = (price = 100) => {
 	const calcCount = document.querySelector(".calc-count");
 	const calcDay = document.querySelector(".calc-day");
 	const calcTotal = document.querySelector(".calc-total>span");
-	let isWorkNow = false;
+	let total;
+
+	let runNumber = (stopNumber, time, step, startNumber, outPlace) => {
+		// Где n это общее кол-во шагов, t - это время на один шаг, time - Общее время
+		// stopNember - нужное нам число, startNumber - начальное число,
+		let isRun = false;
+		return () => {
+			if (isRun === false) {
+				isRun = true;
+				const t = Math.round(time / (+stopNumber / step));
+				let idInterval = setInterval(() => {
+					startNumber += step;
+					outPlace.textContent = startNumber;
+					if (startNumber == stopNumber) {
+						clearInterval(idInterval);
+						isRun = false;
+					}
+				}, t);
+			}
+		};
+	};
 
 	const calc = () => {
 		let calcSelectValue;
@@ -27,7 +45,7 @@ const calculator = (price = 100) => {
 		calcCountValue += (calcCount.value / 10);
 
 		if (calcSquare.value && calcSelectValue) {
-			let total = price * calcSelectValue * calcSquareValue * calcDayValue * calcCountValue;
+			total = price * calcSelectValue * calcSquareValue * calcDayValue * calcCountValue;
 		}
 	};
 
@@ -35,8 +53,11 @@ const calculator = (price = 100) => {
 		if (e.target === calcSelect || e.target === calcSquare ||
 			e.target === calcCount || e.target === calcDay) {
 			calc();
+			if (total) {
+				let a = runNumber(total, 2000, 1, 0, calcTotal);
+				a();
+			}
 		}
-
 	});
 };
 
