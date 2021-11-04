@@ -31,6 +31,8 @@ const calculator = (price = 100) => {
 			price = 110;
 		} else if (calcSelect.selectedIndex === 2) {
 			price = 120;
+		} else {
+			price = 100;
 		}
 
 		calcSelectValue = +calcSelect.options[calcSelect.selectedIndex].value;
