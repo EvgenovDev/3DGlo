@@ -10,19 +10,17 @@ const calculator = (price = 100) => {
 	const calcDay = document.querySelector(".calc-day");
 	const calcTotal = document.querySelector(".calc-total>span");
 	let total;
-	let idInterval;
 
-	const runNumber = (elem1, endNumber, step, startNumber) => {
+	const runNumber = (elem1, endNumber) => {
 		animate({
 			duration: 2000,
 			timing(frame) {
-				return console.log(frame);
+				return frame;
 			},
 			draw(progress) {
-				let arr = [];
-				arr.push(progress);
-				let n = endNumber / arr.length;
-
+				let startNumber = 0;
+				startNumber += endNumber / (1 / progress);
+				elem1.textContent = parseInt(startNumber);
 			}
 		});
 	};
@@ -37,6 +35,8 @@ const calculator = (price = 100) => {
 			price = 110;
 		} else if (calcSelect.selectedIndex === 2) {
 			price = 120;
+		} else {
+			price = 100;
 		}
 
 		calcSelectValue = +calcSelect.options[calcSelect.selectedIndex].value;
