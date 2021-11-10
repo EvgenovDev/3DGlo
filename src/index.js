@@ -1,16 +1,19 @@
 import timer from "./modules/timer";
 import menu from "./modules/menu";
-import validate from "./modules/validate";
+import {
+	calcValidate
+} from "./modules/validate";
 import sliderSwiper from "./modules/sliderSwiper";
 import tabs from "./modules/tabs";
 import modal from "./modules/modal";
 import slider from "./modules/slider";
 import calculator from "./modules/calculator";
+import sendForm from "./modules/sendForm";
 
 timer("1 december 2021");
 menu();
 modal();
-validate();
+calcValidate();
 sliderSwiper();
 tabs();
 slider({
@@ -25,3 +28,6 @@ slider({
 	dotActive: "dot-active"
 });
 calculator();
+sendForm("form1");
+sendForm("form2");
+sendForm("form3");

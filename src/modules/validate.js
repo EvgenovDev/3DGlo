@@ -1,5 +1,4 @@
-const validate = () => {
- const calcValidate = () => {
+const calcValidate = () => {
 	const inputs = document.querySelectorAll(".calc-block>input");
 
 	inputs.forEach((elem) => {
@@ -8,27 +7,49 @@ const validate = () => {
 			elem.value = elem.value.replace(/\D/g, "");
 		});
 	});
- };
+};
 
- const formValidate = (form) => {
-	form.querySelector("input:first-child").addEventListener("input", () => {
-		form.querySelector("input[placeholder='Ваше имя']").value = form.querySelector("input[placeholder='Ваше имя']").value.replace(/[^а-я\s\-]/gi, "");
+const formValidate = (form) => {
+	let valide = true;
+	form.querySelectorAll("input").forEach((elem) => {
+		if (elem.getAttribute("type") == "text") {
+			const regExpName = /[^а-я\s]+/i;
+			regExpName.test(elem.value) ? valide = false : valide = true;
+		} else if (elem.getAttribute("type") == "tel") {
+			const regExpName = /[^\d\+]+/i;
+			regExpName.test(elem.value) ? valide = false : valide = true;
+		} else if (elem.getAttribute("name") == "user_message") {
+			const regExpName = /[^а-я\s\d\.\,]+/i;
+			regExpName.test(elem.value) ? valide = false : valide = true;
+		} else if (elem.getAttribute("type") == "email") {
+			const regExpName = /[a-z\d]+@[a-z]+\.[a-z]/i;
+			regExpName.test(elem.value) ? valide = true : valide = false;
+		}
 	});
-	form.querySelector("input[type='email']").addEventListener("input", () => {
-		form.querySelector("input[type='email']").value = form.querySelector("input[type='email']").value.replace(/[^a-z0-9\-\@\_\.\!\~\*\']/gi, "");
-	});
-	form.querySelector("input[type='tel']").addEventListener("input", () => {
-		form.querySelector("input[type='tel']").value = form.querySelector("input[type='tel']").value.replace(/[^\d\(\)\-]/gi, "");
-	});
- };
+	return valide;
+};
+
+//  const formValidate = (form) => {
+// 	form.querySelector("input:first-child").addEventListener("input", () => {
+// 		form.querySelector("input[placeholder='Ваше имя']").value = form.querySelector("input[placeholder='Ваше имя']").value.replace(/[^а-я\s\-]/gi, "");
+// 	});
+// 	form.querySelector("input[type='email']").addEventListener("input", () => {
+// 		form.querySelector("input[type='email']").value = form.querySelector("input[type='email']").value.replace(/[^a-z0-9\-\@\_\.\!\~\*\']/gi, "");
+// 	});
+// 	form.querySelector("input[type='tel']").addEventListener("input", () => {
+// 		form.querySelector("input[type='tel']").value = form.querySelector("input[type='tel']").value.replace(/[^\d\(\)\-]/gi, "");
+// 	});
+//  };
 
 // const formValidate = (form) => {
 
 // 	const saveCorrectValue = (arr, string, reg) => {
-// 		for(let i = 0; i < string.length; i++) {
-// 			if (reg.test(string[i])) {	arr.push(string[i]); }
+// 		for (let i = 0; i < string.length; i++) {
+// 			if (reg.test(string[i])) {
+// 				arr.push(string[i]);
 // 			}
-// 		};
+// 		}
+// 	};
 
 // 	form.querySelector("input:first-child").addEventListener("blur", () => {
 // 		let str = form.querySelector("input[placeholder='Ваше имя']").value.replace(/^\s+|^\-+|\s+$|\-+$/gm, '');
@@ -39,9 +60,9 @@ const validate = () => {
 
 // 		saveCorrectValue(arr, str, regExp);
 // 		let i = 0;
-// 		if (arr[i] !== undefined){
+// 		if (arr[i] !== undefined) {
 // 			arr[i] = arr[i].toUpperCase();
-// 		} 
+// 		}
 // 		for (i = i + 1; i < arr.length; i++) {
 // 			arr[i] = arr[i].toLowerCase();
 // 		}
@@ -55,7 +76,7 @@ const validate = () => {
 // 		const regExp = /[a-z\@\-\_\.!\~\*]/i;
 // 		const regExp1 = /[a-z\-\_\.\~\*]+@[a-z]+\.[a-z]+/gi;
 
-// 		saveCorrectValue(arr, str, regExp);		
+// 		saveCorrectValue(arr, str, regExp);
 // 		form.querySelector("input[type='email']").value = arr.join("");
 // 		if (!regExp1.test(form.querySelector("input[type='email']").value)) {
 // 			form.querySelector("input[type='email']").value = "";
@@ -74,16 +95,17 @@ const validate = () => {
 // 		str = str.replace(/\-+/g, "-");
 // 		const arr = [];
 // 		const regExp = /[\d\(\)\-]/i;
-		
-// 		saveCorrectValue(arr, str, regExp);		
+
+// 		saveCorrectValue(arr, str, regExp);
 // 		form.querySelector("input[type='tel']").value = arr.join("");
 // 	});
-//  };
+// };
 
- calcValidate();
- formValidate(document.querySelector(".main-form"));
- formValidate(document.querySelector(".footer-form"));
- formValidate(document.querySelector(".popup"));
+// formValidate(document.querySelector(".main-form"));
+// formValidate(document.querySelector(".footer-form"));
+// formValidate(document.querySelector(".popup"));
+
+export {
+	calcValidate,
+	formValidate
 };
-
-export default validate;
