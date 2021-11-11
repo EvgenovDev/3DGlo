@@ -32,7 +32,7 @@ const sendForm = (formId) => {
   <span>I</span>
   <span>N</span>
   <span>G</span>
-</div>`
+</div>`;
 		}
 		newDiv.classList.add(elementClass);
 		form.append(newDiv);
@@ -84,6 +84,18 @@ const sendForm = (formId) => {
 					let content = form.querySelector(".form-message");
 					content.innerHTML = "Данные успешно отправлены.";
 					content.classList.add("success");
+				})
+				.then(() => {
+					if (form !== document.getElementById("form3")) {
+						setTimeout(() => {
+							form.querySelector(".form-message").remove();
+						}, 3000);
+					} else {
+						setTimeout(() => {
+							document.querySelector(".popup").style.display = "none";
+							form.querySelector(".form-message").remove();
+						}, 3000);
+					}
 				})
 				.catch((error) => {
 					console.log(error.message);

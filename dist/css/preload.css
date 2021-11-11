@@ -32,3 +32,7 @@ form .success {
 		margin-left: 25px;
 	}
 }
+
+form .error {
+	border: 2px solid red !important;
+}

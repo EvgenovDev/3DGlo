@@ -16,21 +16,61 @@ const formValidate = (form) => {
 			const regExpName = /[^а-я\s]+/i;
 			if (regExpName.test(elem.value)) {
 				valide = false;
+				elem.classList.add("error");
+				elem.value = "";
+				elem.placeholder = "Только кириллица и пробелы";
+				elem.addEventListener("focus", () => {
+					elem.classList.remove("error");
+					elem.placeholder = "Имя";
+				});
+			} else {
+				elem.classList.remove("error");
+				elem.placeholder = "Имя";
 			}
 		} else if (elem.getAttribute("type") == "tel") {
 			const regExpName = /[^\d\+]+/i;
 			if (regExpName.test(elem.value)) {
 				valide = false;
+				elem.classList.add("error");
+				elem.value = "";
+				elem.placeholder = "Только цифры и знак +";
+				elem.addEventListener("focus", () => {
+					elem.classList.remove("error");
+					elem.placeholder = "Номер телефона";
+				});
+			} else {
+				elem.classList.remove("error");
+				elem.placeholder = "Номер телефона";
 			}
 		} else if (elem.getAttribute("name") == "user_message") {
 			const regExpName = /[^а-я\s\d\.\,]+/i;
 			if (regExpName.test(elem.value)) {
 				valide = false;
+				elem.classList.add("error");
+				elem.value = "";
+				elem.placeholder = "Только кириллица,пробелы,цифры и знаки препинания";
+				elem.addEventListener("focus", () => {
+					elem.classList.remove("error");
+					elem.placeholder = "Ваше сообщение";
+				});
+			} else {
+				elem.classList.remove("error");
+				elem.placeholder = "Ваше сообщение";
 			}
 		} else if (elem.getAttribute("type") == "email") {
 			const regExpName = /[a-z\d]+@[a-z]+\.[a-z]/i;
 			if (!regExpName.test(elem.value)) {
 				valide = false;
+				elem.classList.add("error");
+				elem.value = "";
+				elem.placeholder = "Образец - exam@exam.exam";
+				elem.addEventListener("focus", () => {
+					elem.classList.remove("error");
+					elem.placeholder = "E-mail";
+				});
+			} else {
+				elem.classList.remove("error");
+				elem.placeholder = "E-mail";
 			}
 		}
 	});
