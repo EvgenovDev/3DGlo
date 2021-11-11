@@ -31,7 +31,6 @@ const modal = () => {
 	});
 
 	popup.addEventListener("click", (e) => {
-		console.log(e.target);
 		if (!e.target.closest(".popup-content") || e.target.classList.contains("popup-close")) {
 			popup.style.display = "none";
 		}

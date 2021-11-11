@@ -14,16 +14,24 @@ const formValidate = (form) => {
 	form.querySelectorAll("input").forEach((elem) => {
 		if (elem.getAttribute("type") == "text") {
 			const regExpName = /[^а-я\s]+/i;
-			regExpName.test(elem.value) ? valide = false : valide = true;
+			if (regExpName.test(elem.value)) {
+				valide = false;
+			}
 		} else if (elem.getAttribute("type") == "tel") {
 			const regExpName = /[^\d\+]+/i;
-			regExpName.test(elem.value) ? valide = false : valide = true;
+			if (regExpName.test(elem.value)) {
+				valide = false;
+			}
 		} else if (elem.getAttribute("name") == "user_message") {
 			const regExpName = /[^а-я\s\d\.\,]+/i;
-			regExpName.test(elem.value) ? valide = false : valide = true;
+			if (regExpName.test(elem.value)) {
+				valide = false;
+			}
 		} else if (elem.getAttribute("type") == "email") {
 			const regExpName = /[a-z\d]+@[a-z]+\.[a-z]/i;
-			regExpName.test(elem.value) ? valide = true : valide = false;
+			if (!regExpName.test(elem.value)) {
+				valide = false;
+			}
 		}
 	});
 	return valide;

@@ -1,9 +1,6 @@
 import {
 	formValidate
 } from "./validate";
-import {
-	animate
-} from "./helpers.js";
 
 const sendForm = (formId) => {
 	const form = document.getElementById(formId);
@@ -50,7 +47,20 @@ const sendForm = (formId) => {
 			formObject[key] = val;
 		});
 
-		createDivMessage("div", "preload", "form-message");
+		if (!form.querySelector(".form-message")) {
+			createDivMessage("div", "preload", "form-message");
+		} else {
+			form.querySelector(".form-message").textContent = "";
+			form.querySelector(".form-message").innerHTML = `<div class="loader">
+  <span>L</span>
+  <span>O</span>
+  <span>A</span>
+  <span>D</span>
+  <span>I</span>
+  <span>N</span>
+  <span>G</span>
+</div>`;
+		}
 
 		if (formValidate(form)) {
 			sendData({
@@ -69,6 +79,11 @@ const sendForm = (formId) => {
 					inputs.forEach((elem) => {
 						elem.value = "";
 					});
+				})
+				.then(() => {
+					let content = form.querySelector(".form-message");
+					content.innerHTML = "Данные успешно отправлены.";
+					content.classList.add("success");
 				})
 				.catch((error) => {
 					console.log(error.message);
