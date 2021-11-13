@@ -10,7 +10,6 @@ const calculator = (price = 100) => {
 	const calcDay = document.querySelector(".calc-day");
 	const calcTotal = document.querySelector(".calc-total>span");
 	let total;
-	let ready;
 
 	const runNumber = (elem1, endNumber) => {
 		animate({
@@ -50,10 +49,8 @@ const calculator = (price = 100) => {
 		}
 
 		if (calcSquare.value == 0 || calcSquare.value == "" || calcSelect[calcSelect.selectedIndex].value == "") {
-			ready = false;
 			calcTotal.textContent = 0;
-		} else {
-			ready = true;
+			total = 0;
 		}
 	};
 
@@ -61,7 +58,7 @@ const calculator = (price = 100) => {
 		if (e.target === calcSelect || e.target === calcSquare ||
 			e.target === calcCount || e.target === calcDay) {
 			calc();
-			if (total && ready) {
+			if (total) {
 				runNumber(calcTotal, total);
 			}
 		}
