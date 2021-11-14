@@ -1,7 +1,3 @@
-import {
-	animate
-} from "./helpers";
-
 const calculator = (price = 100) => {
 	const calcBlock = document.querySelector(".calc-block");
 	const calcSelect = document.querySelector(".calc-type");
@@ -10,19 +6,19 @@ const calculator = (price = 100) => {
 	const calcDay = document.querySelector(".calc-day");
 	const calcTotal = document.querySelector(".calc-total>span");
 	let total;
+	let idInterval;
 
-	const runNumber = (elem1, endNumber) => {
-		animate({
-			duration: 2000,
-			timing(frame) {
-				return frame;
-			},
-			draw(progress) {
-				let startNumber = 0;
-				startNumber += endNumber / (1 / progress);
-				elem1.textContent = parseInt(startNumber);
+	let runNumber = (stopNumber, time, step, startNumber, outPlace) => {
+		// Где n это общее кол-во шагов, t - это время на один шаг, time - Общее время
+		// stopNember - нужное нам число, startNumber - начальное число,
+		const t = Math.round(time / (+stopNumber / step));
+		idInterval = setInterval(() => {
+			startNumber += step;
+			outPlace.textContent = startNumber;
+			if (startNumber == stopNumber) {
+				clearInterval(idInterval);
 			}
-		});
+		}, t);
 	};
 
 	const calc = () => {
@@ -44,13 +40,8 @@ const calculator = (price = 100) => {
 		calcDayValue = calcDay.value === "" ? 1 : calcDay.value < 5 ? 2 : calcDay.value < 10 ? 1.5 : 1;
 		calcCountValue += (calcCount.value / 10);
 
-		if (calcSquareValue && calcSelectValue) {
+		if (calcSquare.value && calcSelectValue) {
 			total = price * calcSelectValue * calcSquareValue * calcDayValue * calcCountValue;
-		}
-
-		if (calcSquare.value == 0 || calcSquare.value == "" || calcSelect[calcSelect.selectedIndex].value == "") {
-			calcTotal.textContent = 0;
-			total = 0;
 		}
 	};
 
@@ -58,8 +49,11 @@ const calculator = (price = 100) => {
 		if (e.target === calcSelect || e.target === calcSquare ||
 			e.target === calcCount || e.target === calcDay) {
 			calc();
-			if (total) {
-				runNumber(calcTotal, total);
+			clearInterval(idInterval);
+			if (total && calcSquare.value !== "" && calcSelect.value !== "") {
+				runNumber(total, 2000, 1, 0, calcTotal);
+			} else {
+				calcTotal.textContent = 0;
 			}
 		}
 	});

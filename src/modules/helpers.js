@@ -19,7 +19,7 @@ function animate({
 		draw(progress); // отрисовать её
 
 		if (timeFraction < 1) {
-			id = requestAnimationFrame(animate);
+			requestAnimationFrame(animate);
 		}
 
 	});
