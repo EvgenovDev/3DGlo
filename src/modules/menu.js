@@ -1,19 +1,22 @@
 const menu = () => {
 	const menu = document.querySelector("menu");
-	const serviceBlock = document.querySelector('a[href="#service-block"]');
+	const serviceBlock = document.querySelector('a[href="#service-block"]>img');
 
 	const toggleMenu = () => {
 		document.body.addEventListener("click", (e) => {
 			if (e.target.closest(".menu")) {
 				menu.classList.toggle("active-menu");
 			} else if (e.target === serviceBlock) {
-				scrolls(serviceBlock, getIdLink, e);
+				e.preventDefault();
+				scrolls(e.target.closest("a"), getIdLink);
 			} else if (e.target.closest("menu") === menu &&
 				(e.target.classList.contains("close-btn") || e.target.closest("a"))) {
 				if (e.target.closest("a") && !e.target.classList.contains("close-btn")) {
+					e.preventDefault();
 					menu.classList.toggle("active-menu");
-					scrolls(e.target, getIdLink, e);
+					scrolls(e.target, getIdLink);
 				} else {
+					e.preventDefault();
 					menu.classList.toggle("active-menu");
 				}
 			} else if (e.target.closest("menu") !== menu) {
@@ -22,8 +25,7 @@ const menu = () => {
 		});
 	};
 
-	const scrolls = (elemForFunc, callback, event) => {
-		event.preventDefault();
+	const scrolls = (elemForFunc, callback) => {
 		let id = callback(elemForFunc);
 		document.getElementById(id).scrollIntoView({
 			behavior: "smooth"

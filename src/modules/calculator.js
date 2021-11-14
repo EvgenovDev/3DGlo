@@ -51,7 +51,7 @@ const calculator = (price = 100) => {
 			calc();
 			clearInterval(idInterval);
 			if (total && calcSquare.value !== "" && calcSelect.value !== "") {
-				runNumber(total, 2000, 1, 0, calcTotal);
+				runNumber(total, 500, 100, 0, calcTotal);
 			} else {
 				calcTotal.textContent = 0;
 			}
